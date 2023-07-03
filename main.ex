@@ -1,5 +1,10 @@
 defmodule Main do
 
+  def printNome do
+    nome = "Joao"
+    IO.puts nome
+  end
+
   def olaMundo do
     IO.puts "Ola, Mundo!"
   end
@@ -80,6 +85,32 @@ end
     end
   end
 
+  def primo(0), do: False
+  def primo(1), do: False
+  def primo(x) do
+    calculaPrimo(x,x,0)
+  end
+
+  def calculaPrimo(_,0,cont) do
+      case cont do
+           x when x == 2 -> True
+           _ -> False
+      end
+  end
+  def calculaPrimo(x,y,cont) do
+      if rem(x, y) == 0 do
+         calculaPrimo(x,y-1,cont+1)
+      else
+         calculaPrimo(x,y-1,cont)
+      end
+  end
+
+  @spec inverteLista([integer]) :: [integer]
+  def inverteLista([]), do: []
+  def inverteLista([c | cs]) do
+      inverteLista(cs) ++ [c]
+  end
+
   def estaNaLista(x,[x | t]) do
     true
   end
@@ -119,9 +150,23 @@ end
   existe = Enum.member?(lista, 3)
   IO.inspect existe   # Saída: true
 
+  def iterativo() do
+    nomes = ["João", "Maria", "Pedro"]
+    for nome <- nomes do
+      IO.puts("Olá, #{nome}!")
+    end
+  end
 
+  defmodule Pessoa do
+    defstruct nome: "", idade: 0
+  end
 
-
+  def constroiPessoa() do
+    pessoa = %Pessoa{nome: "João", idade: 30}
+    IO.puts pessoa.nome
+    IO.puts pessoa.idade
+  end
+  
 end
 
 
